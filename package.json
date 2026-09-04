@@ -1,6 +1,6 @@
 {
   "name": "@metyis-porto/ai-debugger-helper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Development-only browser interaction recorder — captures a user session (navigation, DOM interactions, console, network, runtime errors, screenshots) and exports a deterministic reproduction bundle for AI-assisted debugging. Framework-agnostic beyond React; no assumptions about routing, state management, or application domain.",
   "keywords": [
     "debugging",
@@ -59,7 +59,7 @@
     "vitest": "^4.0.8"
   },
   "scripts": {
-    "build": "tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.build.json",
     "lint": "eslint . --max-warnings=0",
     "test": "vitest run --exclude 'dist/**' --passWithNoTests",
     "test:coverage": "vitest run --coverage --exclude 'dist/**' --passWithNoTests",
