@@ -1,0 +1,63 @@
+{
+  "name": "@metyis-porto/ai-debugger-helper",
+  "version": "0.1.0",
+  "description": "Development-only browser interaction recorder — captures a user session (navigation, DOM interactions, console, network, runtime errors, screenshots) and exports a deterministic reproduction bundle for AI-assisted debugging. Framework-agnostic beyond React; no assumptions about routing, state management, or application domain.",
+  "keywords": [
+    "debugging",
+    "browser",
+    "session-recorder",
+    "bug-reproduction",
+    "devtools",
+    "react"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Metyis-Porto/ai-debugger-helper.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./noop": {
+      "types": "./dist/noop.d.ts",
+      "default": "./dist/noop.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "html2canvas": "^1.4.1"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^7.0.0",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^22.10.2",
+    "@types/react": "^19.2.2",
+    "@vitejs/plugin-react": "^6.0.3",
+    "@vitest/coverage-v8": "^4.1.10",
+    "jsdom": "^29.1.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.8"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run --exclude 'dist/**' --passWithNoTests",
+    "test:coverage": "vitest run --coverage --exclude 'dist/**' --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  }
+}
