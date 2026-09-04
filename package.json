@@ -42,12 +42,16 @@
     "react": "^19.2.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
     "@testing-library/jest-dom": "^7.0.0",
     "@testing-library/react": "^16.3.2",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.2",
+    "@typescript-eslint/eslint-plugin": "^8.46.4",
+    "@typescript-eslint/parser": "^8.46.4",
     "@vitejs/plugin-react": "^6.0.3",
     "@vitest/coverage-v8": "^4.1.10",
+    "eslint": "^9.39.1",
     "jsdom": "^29.1.1",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
@@ -56,6 +60,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.json",
+    "lint": "eslint . --max-warnings=0",
     "test": "vitest run --exclude 'dist/**' --passWithNoTests",
     "test:coverage": "vitest run --coverage --exclude 'dist/**' --passWithNoTests",
     "typecheck": "tsc --noEmit"
