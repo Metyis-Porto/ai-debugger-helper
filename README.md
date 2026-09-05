@@ -141,13 +141,40 @@ Reproduce the bug while `recording`, then click **Stop**.
 
 To record something the recorder's own DOM-level categories can't know
 about — an application-specific moment like "edit mode toggled" — call
-this from anywhere in your app while a session is active:
+this from anywhere in your app while a session is active. `recordAction`
+doesn't watch for anything or match on any condition — it just records
+whatever is true *right now*, at the exact line where you call it:
 
 ```ts
 import { recordAction } from '@metyis-porto/ai-debugger-helper';
 
-recordAction('edit-layout-on', { breakpoint: 'lg' });
+function toggleEditMode() {
+  setEditMode(true);
+
+  // `currentBreakpoint` is something *your app* already tracks
+  // (e.g. from a useBreakpoint() hook). recordAction doesn't read
+  // it, compute it, or react to it — it just logs the value your
+  // code hands it, at the moment your code decided to call it.
+  recordAction('edit-layout-on', { breakpoint: currentBreakpoint });
+}
 ```
+
+`recordAction(name, detail?)` takes two positional arguments, no options
+object:
+
+- `name` (`string`, required) — a label identifying the action, e.g.
+  `'edit-layout-on'`. Shows up as-is in `report.md` and `actions.json`.
+- `detail` (`Record<string, unknown>`, optional, defaults to `{}`) —
+  arbitrary extra data to attach, e.g. `{ breakpoint: 'lg' }`. This is
+  descriptive metadata only — the package never inspects, validates, or
+  reacts to what's inside it. **Your app** decides both *when* to call
+  `recordAction` and *what* to put in `detail`; keep the latter
+  JSON-serializable, since it's written verbatim to `actions.json` on
+  export.
+
+It's a no-op if called while the recorder is `idle`, `paused`, or
+`stopped` (same as every other capturer — see `push(event)` in the
+[Technical overview](#the-store-runtimestorets)).
 
 ### 3. Export what you recorded
 
@@ -206,7 +233,7 @@ type BrowserDebugRecorderConfig = {
   — the same lifecycle the toolbar's buttons call directly on the store;
   useful if you're driving the recorder programmatically instead of
   through `<RecorderToolbar>`.
-- `recordAction(name, detail?)` — step 2.
+- `recordAction(name: string, detail?: Record<string, unknown>)` — step 2.
 - `exportRecording()` — step 3.
 - `<RecorderToolbar store onExport />` — the floating panel from step 2.
 - `<RecorderErrorBoundary store fallback?>` — a real error boundary:
