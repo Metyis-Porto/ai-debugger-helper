@@ -1,6 +1,6 @@
 {
   "name": "@metyis-porto/ai-debugger-helper",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Development-only browser interaction recorder — captures a user session (navigation, DOM interactions, console, network, runtime errors, screenshots) and exports a deterministic reproduction bundle for AI-assisted debugging. Framework-agnostic beyond React; no assumptions about routing, state management, or application domain.",
   "keywords": [
     "debugging",
